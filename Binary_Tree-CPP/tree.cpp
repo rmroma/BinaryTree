@@ -1,16 +1,23 @@
 #include <iostream>
 #include "tree.h"
+#include <string>
+
 
 using namespace std;
 
 // Constructors/Destructor ---------------------------
 template <class T>
-Tree<T>::Tree() : numOfNodes(0), root(NULL){}
+Tree<T>::Tree() : numOfNodes(0), root(NULL){ 
+	const std::type_info& r1 = typeid(*this);
+	cout <<  r1.name()+6<< endl; 
+}
 
 template <class T>
 Tree<T>::Tree(const Tree<T>& other){
   numOfNodes = other.getNumOfNodes();
   root = other.getRoot();
+  
+
 }
 
 template <class T>
@@ -272,25 +279,7 @@ void Tree<T>::setParentToNull(Node<T>* node){
 }
 
 template<class T>
-/* Tree<T>::getAscendingData(T data[], Node<T>* node, int &index)
-{
-	if (node->getLeftPtr() != NULL) {
-		getAscendingData(data, node->getLeftPtr(), index);	// Use recursion to go through each node
-	}
 
-	data[index] = node->getData();							// If the left node ptr is null, we are at the smallest node in the branch and can copy data to the array
-	index++;	
-
-	if (node->getRightPtr() != NULL) {						// If there's a right node, we want to print that next
-		getAscendingData(data, node->getRightPtr(), index);
-	}
-}*/
-
-
-
-
-
-// Accessors/Mutators -------------------------------------------
 
 
 
@@ -416,35 +405,7 @@ void Tree<T>::swap(T dataArray[], int i, int j) const {
 	dataArray[j] = temp;
 }
 
-/*template <class T>
-void Tree<T>::returnAscOrDesc(const char aOrD) {
-	
-	T *dataArray = new T[numOfNodes];	// Allocate an array to hold all the data.
-										// Putting the data in an array will make it easy to return in ascending or descending order
-	int index = 0;
-	
-	getAscendingData(dataArray, startPtr, index);	// Fill the array in ascending order... 1, 2, 4, etc
 
-	if (aOrD == 'a') {					// If ascending
-
-		for (int i = 0; i < numOfNodes; i++) {
-
-			cout << dataArray[i] << " ";
-
-		}
-
-	}
-	else {								// If descending					
-
-		for (int i = numOfNodes-1; i >= 0; i--) {
-
-			cout << dataArray[i] << " ";
-
-		}
-
-	}
-
-	cout << endl;
 
 }*/
 
@@ -528,9 +489,7 @@ void Tree<T>::visualTraverse() {
 			break;
 
 	}
-		// 4) Output next node's contents
-
-		// 5) repeat steps 2, 3, and 4 until either the user quits or the user reaches a leaf node  
+	
 
 }
 
@@ -608,3 +567,58 @@ void Tree<T>::printPreOrder() const {
 	else
 		cout << "The tree is empty" << endl;
 }
+
+template <class T>
+int Tree<T>::height(Node<T> * node) const {
+
+	if (node == NULL)
+		return 0;
+	else {
+
+		int l = height(node->getLeft());
+		int r = height(node->getRight());
+
+		if (l > r)
+			return l + 1;
+		return r + 1;
+	}
+
+}
+
+template <class T>
+void Tree<T>::printAllPaths(Node<T>* node, T path[],int size) const {
+
+	
+	
+
+	
+
+
+}
+
+
+/* Function to print level order traversal a tree*/
+template <class T>
+void Tree<T>::printLevelOrder(Node<T> * node)const{
+	int h = height(node);
+	int i;
+	for (i = 1; i <= h; i++)
+		printGivenLevel(root, i);
+}
+
+/* Print nodes at a given level */
+template <class T>
+void Tree<T>::printGivenLevel(Node<T> * node, int level)const
+{
+	if (node == NULL)
+		return;
+	if (level == 1)
+		printf("%d ", node->getData());
+	else if (level > 1)
+	{
+		printGivenLevel(node->getLeft(), level - 1);
+		printGivenLevel(node->getRight(), level - 1);
+	}
+}
+ 
+ 

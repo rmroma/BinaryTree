@@ -3,6 +3,7 @@
 
 #include "node.h"
 #include <cstddef>
+#include <vector>
 
 template <class T>
 class Tree {
@@ -151,7 +152,12 @@ class Tree {
 
 	T *  getAscOrDdecDataArray(char aORd) const;
 
-	
+	int height(Node<T> * node) const;
+
+	void printAllPaths(Node<T>* node, T path[], int size)  const;
+
+	void printLevelOrder(Node<T> * node)const;
+	void printGivenLevel(Node<T> * node, int level)const;
 };
 
 #endif

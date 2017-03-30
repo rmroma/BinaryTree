@@ -8,6 +8,8 @@ Node<T>::Node(){
 	setData(0);
 	setLeft(NULL);
 	setRight(NULL);
+	
+	
 }
 
 template <class T>
